@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://gutendex:321321321@gutendex:5432/mydb
+    networks:
+      - mynetwork
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=gutendex
+      - POSTGRES_PASSWORD=321321321
+      - POSTGRES_DB=gutendex
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  #   depends_on:
+  #     - app
+  #   networks:
+  #     - mynetwork
+
+networks:
+  mynetwork:
+
+volumes:
+  db_data:
