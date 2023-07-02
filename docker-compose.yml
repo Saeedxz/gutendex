@@ -7,8 +7,8 @@ services:
       - 8000:8000
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://gutendex:321321321@gutendex:5432/mydb
+    environment: 
+      - SECRET_KEY=123123123
     networks:
       - mynetwork
 

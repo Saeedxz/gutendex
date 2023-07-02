@@ -1,6 +1,6 @@
 ADMIN_EMAILS=you@your.domain.here
 ADMIN_NAMES=saeed
-ALLOWED_HOSTS=127.0.0.1
+ALLOWED_HOSTS=127.0.0.1,localhost,.your.domain.here,0.0.0.0,post,nginx,guten
 DATABASE_HOST=127.0.0.1
 DATABASE_NAME=gutendex
 DATABASE_PASSWORD=321321321
